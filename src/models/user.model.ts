@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import * as bcrypt from "bcrypt";
+import mongoose from 'mongoose';
+import * as bcrypt from 'bcrypt';
 
 export interface IUser {
     _id: String,
@@ -14,20 +14,20 @@ export interface IUser {
 const UserSchema = new mongoose.Schema({
     firstName: {
         type: String,
-        required: [true, "First name is required"],
+        required: [true, 'First name is required'],
     },
     lastName: {
         type: String,
-        required: [true, "Last name is required"],
+        required: [true, 'Last name is required'],
     },
     email: {
         type: String,
-        required: [true, "Email is required"],
+        required: [true, 'Email is required'],
         unique: true,
     },
     password: {
         type: String,
-        required: [true, "Password is required"],
+        required: [true, 'Password is required'],
     },
     birthday: {
         type: Date,
@@ -39,7 +39,7 @@ const UserSchema = new mongoose.Schema({
 },{
     timestamps: true,
 });
-UserSchema.pre("save", async function (next: any) {
+UserSchema.pre('save', async function(next: any) {
     if(this.password){
         const salt = await bcrypt.genSalt();
         this.password = await bcrypt.hash(this.password, salt);
@@ -47,4 +47,4 @@ UserSchema.pre("save", async function (next: any) {
     next();
 
 });
-export const User = mongoose.model("user", UserSchema);
+export const User = mongoose.model('user', UserSchema);

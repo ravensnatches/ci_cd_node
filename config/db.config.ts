@@ -1,20 +1,20 @@
 //importing modules
-import dotenv from 'dotenv'
-import mongoose from 'mongoose'
-import {logger} from "./logger";
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import {logger} from './logger';
 
-dotenv.config()
+dotenv.config();
 
 //details from the env
-const username = process.env.LOGIN
-const password = process.env.PASSWORD
-const dbName = process.env.DB_NAME
-const dbUrl = process.env.DB_URL
+const username = process.env.LOGIN;
+const password = process.env.PASSWORD;
+const dbName = process.env.DB_NAME;
+const dbUrl = process.env.DB_URL;
 
 //connection string to mongo atlas
 
-const connectionString = `mongodb+srv://${username}:${password}@${dbUrl}/${dbName}?retryWrites=true&w=majority`
-console.log(connectionString)
+const connectionString = `mongodb+srv://${username}:${password}@${dbUrl}/${dbName}?retryWrites=true&w=majority`;
+console.log(connectionString);
 
 const options = {
     autoIndex: false, // Don't build indexes
@@ -27,11 +27,11 @@ const options = {
 export const db = mongoose.connect(connectionString, options)
     .then(res => {
         if(res){
-            console.log(`Database connection successfully to ${dbName}`)
-            logger.info(`Database connection successfully to ${dbName}`)
+            console.log(`Database connection successfully to ${dbName}`);
+            logger.info(`Database connection successfully to ${dbName}`);
         }
 
     }).catch(err => {
-        console.log('`Database connection error', err)
-        logger.error('`Database connection error', err)
-    })
+        console.log('`Database connection error', err);
+        logger.error('`Database connection error', err);
+    });

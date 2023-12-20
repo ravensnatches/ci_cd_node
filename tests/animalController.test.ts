@@ -15,7 +15,7 @@ describe('Animal Controller - getAnimals', () => {
     findStub.restore();
   });
 
-  it('Doit retourné une liste d\'animaux', async () => {
+  it('Doit retourné une liste d\'animaux', async() => {
     const expectedAnimals = [
       { name: 'Chien', age: 3, isDomestic: true },
       { name: 'Chat', age: 2, isDomestic: true },
@@ -37,7 +37,7 @@ describe('Animal Controller - getAnimals', () => {
     expect(result).to.deep.equal(expectedAnimals);
   });
 
-  it('Doit gérer les erreurs et retourner une erreur 500', async () => {
+  it('Doit gérer les erreurs et retourner une erreur 500', async() => {
     const errorMessage = 'Some error occurred';
 
     findStub.rejects(new Error(errorMessage));
@@ -69,7 +69,7 @@ describe('Animal Controller - addAnimal', () => {
     createStub.restore();
   });
 
-  it('Doit créer un nouvelle animal', async () => {
+  it('Doit créer un nouvelle animal', async() => {
     const newAnimal = { name: 'Chien', age: 3, isDomestic: true };
     const expectedAnimal = { ...newAnimal, _id: 'some_unique_id' };
 
@@ -91,7 +91,7 @@ describe('Animal Controller - addAnimal', () => {
     expect(result).to.deep.equal(expectedAnimal);
   });
 
-  it('Doit gérer les erreurs et retourner une erreur 400', async () => {
+  it('Doit gérer les erreurs et retourner une erreur 400', async() => {
     const invalidAnimal = { name: 'Chien', age: 'not_a_number', isDomestic: true };
 
     const req: Partial<Request> = {
@@ -110,7 +110,7 @@ describe('Animal Controller - addAnimal', () => {
     expect(result).to.equal('\"age\" must be a number');
   });
 
-  it('Doit gérer les erreurs de création et retourner une erreur 400', async () => {
+  it('Doit gérer les erreurs de création et retourner une erreur 400', async() => {
     const newAnimal = { name: 'Chien', age: 3, isDomestic: true };
     const errorMessage = 'Some error occurred';
 
@@ -144,7 +144,7 @@ describe('Animal Controller - getOneAnimal', () => {
     findByIdStub.restore();
   });
 
-  it('should get a single animal', async () => {
+  it('should get a single animal', async() => {
     const animalId = 'some_unique_id';
     const expectedAnimal = { _id: animalId, name: 'Chien', age: 3, isDomestic: true };
 
@@ -166,7 +166,7 @@ describe('Animal Controller - getOneAnimal', () => {
     expect(result).to.deep.equal(expectedAnimal);
   });
 
-  it('Doit gérer les erreurs not found d\'animal et retourner une erreur 404', async () => {
+  it('Doit gérer les erreurs not found d\'animal et retourner une erreur 404', async() => {
     const animalId = 'some_non_existent_id';
 
     findByIdStub.withArgs(animalId).resolves(null);
@@ -187,7 +187,7 @@ describe('Animal Controller - getOneAnimal', () => {
     expect(result).to.equal('Animal not found');
   });
 
-  it('Doit gérer les erreurs de récupération et retourner une erreur 500', async () => {
+  it('Doit gérer les erreurs de récupération et retourner une erreur 500', async() => {
     const animalId = 'some_unique_id';
     const errorMessage = 'Some error occurred';
 
@@ -221,7 +221,7 @@ describe('Animal Controller - updateAnimal', () => {
     findByIdAndUpdateStub.restore();
   });
 
-  it('Doit mettre à jour un animal', async () => {
+  it('Doit mettre à jour un animal', async() => {
     const animalId = 'some_unique_id';
     const updatedAnimal = { name: 'Chien', age: 4, isDomestic: false };
     const expectedAnimal = { _id: animalId, ...updatedAnimal };
@@ -245,7 +245,7 @@ describe('Animal Controller - updateAnimal', () => {
     expect(result).to.deep.equal(expectedAnimal);
   });
 
-  it('Doit gérer les erreurs d\'animal not found et retourner une erreur 404', async () => {
+  it('Doit gérer les erreurs d\'animal not found et retourner une erreur 404', async() => {
     const animalId = 'some_non_existent_id';
     const updatedAnimal = { name: 'Chien', age: 4, isDomestic: false };
 
@@ -268,7 +268,7 @@ describe('Animal Controller - updateAnimal', () => {
     expect(result).to.equal('Animal not found');
   });
 
-  it('Doit gérer les erreurs de mise à jour et retourner une erreur 500', async () => {
+  it('Doit gérer les erreurs de mise à jour et retourner une erreur 500', async() => {
     const animalId = 'some_unique_id';
     const updatedAnimal = { name: 'Chien', age: 4, isDomestic: false };
     const errorMessage = 'Some error occurred';
@@ -304,7 +304,7 @@ describe('Animal Controller - deleteAnimal', () => {
     findByIdAndDeleteStub.restore();
   });
 
-  it('Doit supprimer un animal', async () => {
+  it('Doit supprimer un animal', async() => {
     const animalId = 'some_unique_id';
     const deletedAnimal = { _id: animalId, name: 'Chien', age: 3, isDomestic: true };
 
@@ -326,7 +326,7 @@ describe('Animal Controller - deleteAnimal', () => {
     expect(result).to.equal('Animal deleted');
   });
 
-  it('Doit gérer les erreurs de not found et retourner une erreur 404', async () => {
+  it('Doit gérer les erreurs de not found et retourner une erreur 404', async() => {
     const animalId = 'some_non_existent_id';
 
     findByIdAndDeleteStub.withArgs(animalId).resolves(null);

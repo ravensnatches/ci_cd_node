@@ -1,12 +1,12 @@
 // Import module
-import {Human, IHumans} from '../models/human'
-import {logger} from "../../config/logger";
+import {Human, IHumans} from '../models/human';
+import {logger} from '../../config/logger';
 
 export class humanService {
     // Create a human
     async createHuman(data: any) {
         try {
-            return await Human.create(data)
+            return await Human.create(data);
         } catch (error) {
             logger.error('Service -> createHuman : Erreur lors de la création d\'un humain :' + error);
             throw new Error('Erreur lors de la création d\'un humain :' + error);
@@ -16,7 +16,7 @@ export class humanService {
     // Get all Humans
     async getHumans() {
         try {
-            return await Human.find({}).populate("animals")
+            return await Human.find({}).populate('animals');
         } catch (error) {
             logger.error('Service -> getHumans : Erreur lors de la récupération des humains :' + error);
             throw new Error('Erreur lors de la récupération des humains :' + error);
@@ -27,11 +27,11 @@ export class humanService {
     async getHuman(id: string) {
 
         try {
-            const human = await Human.findById({_id: id}).populate("animals")
+            const human = await Human.findById({_id: id}).populate('animals');
             if (!human) {
-                return null
+                return null;
             }
-            return human
+            return human;
 
         } catch (error) {
             logger.error('Service -> getHuman : Erreur lors de la récupération de l\'humain : ' + id + ' ' + error);
@@ -45,11 +45,11 @@ export class humanService {
             //pass the id of the object you want to update
             //data is for the new body you are updating the old one with
             //new:true, so the dats being returned, is the update one
-            const human = await Human.findByIdAndUpdate({_id: id}, data, {new: true})
+            const human = await Human.findByIdAndUpdate({_id: id}, data, {new: true});
             if (!human) {
-                return null
+                return null;
             }
-            return human
+            return human;
         } catch (error) {
             logger.error('Service -> updateHuman : Erreur lors de la mise à jour de l\'humain : ' + id + ' ' + error);
             throw new Error('Erreur lors de la mise à jour de l\'humain : ' + id + ' ' + error);
@@ -59,11 +59,11 @@ export class humanService {
     //delete a human by using the find by id and delete
     async deleteHuman(id: string) {
         try {
-            const human = await Human.findById({_id: id})
+            const human = await Human.findById({_id: id});
             if (!human) {
-                return null
+                return null;
             }
-            const humanToDelete = await Human.findByIdAndDelete({_id: id});
+            await Human.findByIdAndDelete({_id: id});
             return human;
         } catch (error) {
             logger.error('Service -> deleteHuman : Erreur lors de la suppresion de l\'humain : ' + id + ' ' + error);
@@ -92,7 +92,7 @@ export class humanService {
                         $and: [
                             {salary: {$lte: 1000}},
                             {age: {$gte: 40}},
-                            {city: "Paris"},
+                            {city: 'Paris'},
                         ],
                     },
                 },
@@ -141,4 +141,4 @@ export class humanService {
 }
 
 //export the class
-export const humanServices = new humanService()
+export const humanServices = new humanService();
